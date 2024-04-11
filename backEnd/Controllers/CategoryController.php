@@ -1,13 +1,13 @@
 <?php
 
-class ProductController extends BaseController
+class CategoryController extends BaseController
 {
     private $model;
 
     public function __construct()
     {
-        $this->loadModel('ProductModel');
-        $this->model = new ProductModel;
+        $this->loadModel('CategoryModel');
+        $this->model = new CategoryModel;
     }
 
     public function index()
@@ -69,21 +69,4 @@ class ProductController extends BaseController
     }
 
 
-    public function nutritionalValue()
-    {
-        $id = $_GET['id'];
-        $data = $this->model->mNutritionalValue($id);
-        // Trả về dữ liệu dưới dạng JSON
-        header('Content-Type: application/json');
-        echo json_encode($data);
-    }
-
-    public function getCategory()
-    {
-        $id = $_GET['id'];
-        $data = $this->model->mGetCategory($id);
-        // Trả về dữ liệu dưới dạng JSON
-        header('Content-Type: application/json');
-        echo json_encode($data);
-    }
 }

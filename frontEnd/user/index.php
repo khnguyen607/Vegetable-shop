@@ -17,6 +17,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
 
+    <style>
+        /* Initial state: fully transparent */
+        main {
+            opacity: 0;
+            /* Apply transition effect to opacity property */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* When section.thesidebar_section is visible (e.g., after a class is added via JavaScript) */
+        main.show {
+            opacity: 1;
+        }
+    </style>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/aos.css">
@@ -79,5 +92,13 @@
     echo "<script src='$page_path.js'></script>"
     ?>
 </body>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var main = document.querySelector("main");
+        main.classList.add("show"); // Add the "show" class to trigger the animation
+    });
+</script>
 
 </html>

@@ -10,13 +10,12 @@
             style="background-image: url(assets/images/breadcrumb/breadcrumb1.png);">
             <div class="breadcrumb_cont text-center">
                 <div class="breadcrumb_title">
-                    <h2 class="text-white">Cart Page</h2>
+                    <h2 class="text-white">Giỏ hàng</h2>
                 </div>
                 <ul
                     class="list-unstyled breadcrumb_item d-flex justify-content-center align-items-center text-white">
-                    <li><a href="index.html"><i class="fas fa-home active"></i>Home</a></li>
-                    <li><i class="fas fa-chevron-right"></i>About</li>
-                    <li><i class="fas fa-chevron-right"></i>Dried</li>
+                    <li><a href="./"><i class="fas fa-home active"></i>Trang chủ</a></li>
+                    <li><i class="fas fa-chevron-right"></i>Giỏ hàng</li>
                 </ul>
             </div>
         </div>
@@ -31,11 +30,11 @@
                 <table class="table align-middle">
                     <thead class="text-uppercase">
                         <tr>
-                            <th>photo</th>
-                            <th>product name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
+                            <th>Ảnh</th>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng cộng</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +54,7 @@
                                     <a href="products.html">
                                         <h4 class="item_title">Curated Products</h4>
                                     </a>
-                                    <span class="item_type">Shop groceries</span>
+                                    <!-- <span class="item_type">Shop groceries</span> -->
                                 </div>
                             </td>
                             <td>
@@ -75,7 +74,7 @@
                             </td>
                         </tr>
 
-                        <tr>
+                        <!-- <tr>
                             <td>
                                 <div class="cart_product position-relative">
                                     <div class="item_image">
@@ -144,7 +143,7 @@
                             <td>
                                 <span class="total_price">$138.00</span>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -159,21 +158,18 @@
                         Coupon</button>
                 </div>
                 <button type="button"
-                    class="btn coupon_update_btn text-white rounded-pill py-2 py-sm-3 px-3 px-sm-5 text-uppercase">Update
-                    Cart</button>
+                    class="btn coupon_update_btn text-white rounded-pill py-2 py-sm-3 px-3 px-sm-5 text-uppercase">Cập nhật</button>
             </div>
 
             <div class="row justify-content-lg-end">
                 <div class="col col-lg-4 mt-5">
                     <div class="cart_pricing_table text-uppercase">
-                        <h3 class="table_title text-center">Cart Total</h3>
+                        <h3 class="table_title text-center">Chi phí giỏ hàng</h3>
                         <ul class="ul_li_block clearfix">
-                            <li><span>Subtotal</span> <span>$197.99</span></li>
-                            <li><span>Total</span> <span>$197.99</span></li>
+                            <li><span>Tổng cộng</span> <span class="total_price_Total">$197.99</span></li>
                         </ul>
                         <div class="btn_wrap pt-0 text-center">
-                            <a href="#" class="btn text-uppercase text-white rounded-pill">Proceed to
-                                Checkout</a>
+                            <a href="./?page=checkout" class="btn text-uppercase text-white rounded-pill">Thanh toán</a>
                         </div>
                     </div>
                 </div>
