@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th4 10, 2024 lúc 04:37 AM
+-- Thời gian đã tạo: Th4 12, 2024 lúc 06:44 AM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -31,6 +31,20 @@ CREATE TABLE `categories` (
   `ID` int NOT NULL,
   `Name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `categories`
+--
+
+INSERT INTO `categories` (`ID`, `Name`) VALUES
+(1, 'rau ăn lá'),
+(2, 'rau ăn củ'),
+(3, 'rau ăn quả'),
+(4, 'rau gia vị'),
+(5, 'nấm'),
+(6, 'trái cây trong nước'),
+(7, 'trái cây nhập khẩu'),
+(8, 'trái cây sấy khô');
 
 -- --------------------------------------------------------
 
@@ -104,6 +118,26 @@ INSERT INTO `products` (`ID`, `Name`, `Price`, `Subtitle`, `Description`, `Img`,
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `syn_products_categories`
+--
+
+CREATE TABLE `syn_products_categories` (
+  `ID` int NOT NULL,
+  `productID` int NOT NULL,
+  `categoryID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `syn_products_categories`
+--
+
+INSERT INTO `syn_products_categories` (`ID`, `productID`, `categoryID`) VALUES
+(1, 4, 5),
+(2, 4, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `syn_products_nutritionists`
 --
 
@@ -146,6 +180,14 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Chỉ mục cho bảng `syn_products_categories`
+--
+ALTER TABLE `syn_products_categories`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `syn_products_categories_categories` (`categoryID`),
+  ADD KEY `syn_products_categories_products` (`productID`);
+
+--
 -- Chỉ mục cho bảng `syn_products_nutritionists`
 --
 ALTER TABLE `syn_products_nutritionists`
@@ -161,7 +203,7 @@ ALTER TABLE `syn_products_nutritionists`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `nutritionists`
@@ -176,6 +218,12 @@ ALTER TABLE `products`
   MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT cho bảng `syn_products_categories`
+--
+ALTER TABLE `syn_products_categories`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `syn_products_nutritionists`
 --
 ALTER TABLE `syn_products_nutritionists`
@@ -184,6 +232,13 @@ ALTER TABLE `syn_products_nutritionists`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `syn_products_categories`
+--
+ALTER TABLE `syn_products_categories`
+  ADD CONSTRAINT `syn_products_categories_categories` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `syn_products_categories_products` FOREIGN KEY (`productID`) REFERENCES `products` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Các ràng buộc cho bảng `syn_products_nutritionists`
