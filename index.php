@@ -5,5 +5,5 @@ function redirectTo($url) {
 }
 
 // Sử dụng hàm redirectTo để chuyển hướng đến một router cụ thể
-redirectTo("./frontEnd/user/");
+redirectTo("./frontend/client/");
 ?>

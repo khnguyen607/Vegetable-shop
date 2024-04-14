@@ -29,34 +29,31 @@ class UserController extends BaseController
         echo json_encode($user);
     }
 
-    public function addStudent()
+    public function addUser()
     {
         $data = [
-            'email'  => $_POST['email'],
-            'name'  => $_POST['name'],
-            'user'  => $_POST['user'],
-            'pass'  => $_POST['pass']
+            'Name'  => $_POST['Name'],
+            'UserName'  => $_POST['UserName'],
+            'Password'  => $_POST['Password']
         ];
-
-        if ($this->model->checkuser_name($data['user'])) {
-            $this->model->bmInsert($data);
-            header("Location: ../frontend/auth-sign-in.html?user=" . $data['user']);
+        if ($this->model->checkuser_name($data['UserName'])) {
+            $this->model->mInsert($data);
+            header("Location: ../frontend/client/?signupSuccfully=" . $data['Name']);
         } else {
-            header("Location: ../frontend/auth-sign-up.html?name=" . $data['name']);
+            header("Location: ../frontend/client/?signupFailed=" . $data['UserName']);
         }
     }
 
     public function addLibrarian()
     {
         $data = [
-            'email'  => $_POST['email'],
-            'name'  => $_POST['name'],
-            'user'  => $_POST['user'],
-            'pass'  => $_POST['pass'],
-            'role'  => '1'
+            'Name'  => $_POST['Name'],
+            'UserName'  => $_POST['UserName'],
+            'Password'  => $_POST['Password'],
+            'Role'  => '1'
         ];
 
-        if ($this->model->checkuser_name($data['user'])) {
+        if ($this->model->checkuser_name($data['UserName'])) {
             $this->model->bmInsert($data);
             header("Location: ../frontend/dashboard.html?tab=mgr__user");
         } else {
@@ -68,8 +65,7 @@ class UserController extends BaseController
     {
         $id = $_GET['id'];
         $data = [
-            'email'  => $_POST['email'],
-            'name'  => $_POST['name']
+            'Name'  => $_POST['Name']
         ];
 
         $this->model->mUpdate($id, $data);
@@ -79,15 +75,14 @@ class UserController extends BaseController
     public function updateUser()
     {
         $data = [
-            'email'       => $_POST['email'],
-            'name'        => $_POST['name'],
-            'user'        => $_POST['user'],
+            'Name'        => $_POST['Name'],
+            'UserName'        => $_POST['UserName'],
             'currentpass' => $_POST['currentpass'],
             'newpass'     => $_POST['newpass']
         ];
 
-        if($this->model->updateU($data)) header("Location: ../frontend/user.html?update=true");
-        else header("Location: ../frontend/user.html?update=false");
+        if($this->model->updateU($data)) header("Location: ../frontend/client.html?update=true");
+        else header("Location: ../frontend/client.html?update=false");
         
     }
 
@@ -104,22 +99,22 @@ class UserController extends BaseController
     public function login()
     {
         $data = [
-            'user'  => $_POST['user'],
-            'pass'  => $_POST['pass']
+            'UserName'  => $_POST['UserName'],
+            'Password'  => $_POST['Password']
         ];
 
         $check = $this->model->isValidUser($data);
         if ($check) {
-            header("Location: ../frontend/index.html");
+            header("Location: ../frontend/client/?loginSuccfully=true");
         } else {
-            header("Location: ../frontend/auth-sign-in.html?loginF=" . $data['user']);
+            header("Location: ../frontend/client/?loginFailed=" . $data['UserName']);
         }
     }
 
     public function logout()
     {
         setcookie("user_id", "", time() - 3600, "/");
-        header("Location: ../frontend/auth-sign-in.html");
+        header("Location: ../frontend/client/?logoutFailed=true");
     }
 
     public function check()

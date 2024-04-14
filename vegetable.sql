@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th4 12, 2024 lúc 06:44 AM
+-- Thời gian đã tạo: Th4 14, 2024 lúc 11:14 PM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -94,26 +94,30 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ID`, `Name`, `Price`, `Subtitle`, `Description`, `Img`, `Unit`) VALUES
-(1, 'Cà rốt', 15, 'Rau củ giàu vitamin A', '<p>Cà rốt là một loại rau củ giàu vitamin A, thích hợp cho sức khỏe của mắt và da.</p>', 'assets/images/product/product1.png', 'kg'),
-(2, 'Cải bắp', 20, 'Rau củ chứa nhiều chất dinh dưỡng', '<p>Cải bắp là một loại rau củ giàu chất dinh dưỡng, cung cấp nhiều vitamin và khoáng chất cho cơ thể.</p>', 'assets/images/product/product2.png', 'kg'),
-(3, 'Cải thảo', 18, 'Rau củ có hàm lượng chất xơ cao', '<p>Cải thảo là một loại rau củ có hàm lượng chất xơ cao, giúp cải thiện tiêu hóa và duy trì sức khỏe đường ruột.</p>', 'assets/images/product/product3.png', 'kg'),
-(4, 'Bắp cải', 25, 'Rau củ giàu chất chống oxy hóa', '<p>Bắp cải là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa sự lão hóa và bảo vệ cơ thể khỏi các bệnh tật.</p>', 'assets/images/product/product4.png', 'kg'),
-(5, 'Cải xoong', 22, 'Rau củ chứa nhiều vitamin C', '<p>Cải xoong là một loại rau củ giàu vitamin C, giúp tăng cường hệ miễn dịch và chống vi khuẩn.</p>', 'assets/images/product/product5.png', 'kg'),
-(6, 'Bí ngô', 30, 'Rau củ giàu vitamin E và K', '<p>Bí ngô là một loại rau củ giàu vitamin E và K, giúp duy trì sức khỏe của da và xương.</p>', 'assets/images/product/product6.png', 'kg'),
-(7, 'Cà chua', 12, 'Rau củ giàu lycopene', '<p>Cà chua là một loại rau củ giàu lycopene, một chất chống oxy hóa mạnh mẽ giúp bảo vệ tim và gan.</p>', 'assets/images/product/product7.png', 'kg'),
-(8, 'Bí đỏ', 28, 'Rau củ giàu chất chống oxy hóa', '<p>Bí đỏ là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa các bệnh ung thư và tăng cường sức khỏe tim mạch.</p>', 'assets/images/product/product8.png', 'kg'),
-(9, 'Rau muống', 15, 'Rau củ giàu chất dinh dưỡng', '<p>Rau muống là một loại rau củ giàu chất dinh dưỡng, cung cấp nhiều vitamin và khoáng chất cho cơ thể.</p>', 'assets/images/product/product9.png', 'kg'),
-(10, 'Cải ngọt', 20, 'Rau củ giàu vitamin K', '<p>Cải ngọt là một loại rau củ giàu vitamin K, giúp tăng cường sức khỏe của hệ xương và giảm nguy cơ loãng xương.</p>', 'assets/images/product/product10.png', 'kg'),
-(11, 'Bắp cải xanh', 25, 'Rau củ giàu chất xơ', '<p>Bắp cải xanh là một loại rau củ giàu chất xơ, giúp cải thiện tiêu hóa và duy trì sức khỏe đường ruột.</p>', 'assets/images/product/product11.png', 'kg'),
-(12, 'Củ cải trắng', 18, 'Rau củ giàu vitamin C', '<p>Củ cải trắng là một loại rau củ giàu vitamin C, giúp tăng cường hệ miễn dịch và chống vi khuẩn.</p>', 'assets/images/product/product12.png', 'kg'),
-(13, 'Cà rốt sạch', 22, 'Rau củ hữu cơ', '<p>Cà rốt sạch là một loại rau củ hữu cơ, không chứa các hóa chất độc hại, an toàn cho sức khỏe.</p>', 'assets/images/product/product13.png', 'kg'),
-(14, 'Khoai tây', 18, 'Rau củ giàu kali', '<p>Khoai tây là một loại rau củ giàu kali, giúp duy trì cân bằng nước và điện giải trong cơ thể.</p>', 'assets/images/product/product14.png', 'kg'),
-(15, 'Khoai lang', 20, 'Rau củ giàu chất chống oxy hóa', '<p>Khoai lang là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa sự lão hóa và bảo vệ cơ thể khỏi các bệnh tật.</p>', 'assets/images/product/product10.png', 'kg'),
-(16, 'Cần tây', 15, 'Rau củ giàu chất xơ', '<p>Cần tây là một loại rau củ giàu chất xơ, giúp cải thiện tiêu hóa và duy trì sức khỏe đường ruột.</p>', 'assets/images/product/product9.png', 'kg'),
-(17, 'Khoai mỡ', 22, 'Rau củ giàu vitamin C', '<p>Khoai mỡ là một loại rau củ giàu vitamin C, giúp tăng cường hệ miễn dịch và chống vi khuẩn.</p>', 'assets/images/product/product8.png', 'kg'),
-(18, 'Cải đắng', 25, 'Rau củ giàu chất chống oxy hóa', '<p>Cải đắng là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa các bệnh ung thư và tăng cường sức khỏe tim mạch.</p>', 'assets/images/product/product7.png', 'kg'),
-(19, 'Cà rốt baby', 30, 'Rau củ giàu vitamin A', '<p>Cà rốt baby là một loại rau củ giàu vitamin A, thích hợp cho sức khỏe của mắt và da.</p>', 'assets/images/product/product19.png', 'kg'),
-(20, 'Bắp cải đỏ', 35, 'Rau củ giàu chất dinh dưỡng', '<p>Bắp cải đỏ là một loại rau củ giàu chất dinh dưỡng, cung cấp nhiều vitamin và khoáng chất cho cơ thể.</p>', 'assets/images/product/product6.png', 'kg');
+(1, 'Cà rốt', 15, 'Rau củ giàu vitamin A', '<p>Cà rốt là một loại rau củ giàu vitamin A, thích hợp cho sức khỏe của mắt và da.</p>', 'images/products/product1.png', 'kg'),
+(2, 'Cải bắp', 20, 'Rau củ chứa nhiều chất dinh dưỡng', '<p>Cải bắp là một loại rau củ giàu chất dinh dưỡng, cung cấp nhiều vitamin và khoáng chất cho cơ thể.</p>', 'images/products/product2.png', 'kg'),
+(3, 'Cải thảo', 18, 'Rau củ có hàm lượng chất xơ cao', '<p>Cải thảo là một loại rau củ có hàm lượng chất xơ cao, giúp cải thiện tiêu hóa và duy trì sức khỏe đường ruột.</p>', 'images/products/product3.png', 'kg'),
+(4, 'Bắp cải', 25, 'Rau củ giàu chất chống oxy hóa', '<p>Bắp cải là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa sự lão hóa và bảo vệ cơ thể khỏi các bệnh tật.</p>', 'images/products/product4.png', 'kg'),
+(5, 'Cải xoong', 22, 'Rau củ chứa nhiều vitamin C', '<p>Cải xoong là một loại rau củ giàu vitamin C, giúp tăng cường hệ miễn dịch và chống vi khuẩn.</p>', 'images/products/product5.png', 'kg'),
+(6, 'Bí ngô', 30, 'Rau củ giàu vitamin E và K', '<p>Bí ngô là một loại rau củ giàu vitamin E và K, giúp duy trì sức khỏe của da và xương.</p>', 'images/products/product6.png', 'kg'),
+(7, 'Cà chua', 12, 'Rau củ giàu lycopene', '<p>Cà chua là một loại rau củ giàu lycopene, một chất chống oxy hóa mạnh mẽ giúp bảo vệ tim và gan.</p>', 'images/products/product7.png', 'kg'),
+(8, 'Bí đỏ', 28, 'Rau củ giàu chất chống oxy hóa', '<p>Bí đỏ là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa các bệnh ung thư và tăng cường sức khỏe tim mạch.</p>', 'images/products/product8.png', 'kg'),
+(9, 'Rau muống', 15, 'Rau củ giàu chất dinh dưỡng', '<p>Rau muống là một loại rau củ giàu chất dinh dưỡng, cung cấp nhiều vitamin và khoáng chất cho cơ thể.</p>', 'images/products/product9.png', 'kg'),
+(10, 'Cải ngọt', 20, 'Rau củ giàu vitamin K', '<p>Cải ngọt là một loại rau củ giàu vitamin K, giúp tăng cường sức khỏe của hệ xương và giảm nguy cơ loãng xương.</p>', 'images/products/product10.png', 'kg'),
+(11, 'Bắp cải xanh', 25, 'Rau củ giàu chất xơ', '<p>Bắp cải xanh là một loại rau củ giàu chất xơ, giúp cải thiện tiêu hóa và duy trì sức khỏe đường ruột.</p>', 'images/products/product11.png', 'kg'),
+(12, 'Củ cải trắng', 18, 'Rau củ giàu vitamin C', '<p>Củ cải trắng là một loại rau củ giàu vitamin C, giúp tăng cường hệ miễn dịch và chống vi khuẩn.</p>', 'images/products/product12.png', 'kg'),
+(13, 'Cà rốt sạch', 22, 'Rau củ hữu cơ', '<p>Cà rốt sạch là một loại rau củ hữu cơ, không chứa các hóa chất độc hại, an toàn cho sức khỏe.</p>', 'images/products/product13.png', 'kg'),
+(14, 'Khoai tây', 18, 'Rau củ giàu kali', '<p>Khoai tây là một loại rau củ giàu kali, giúp duy trì cân bằng nước và điện giải trong cơ thể.</p>', 'images/products/product14.png', 'kg'),
+(15, 'Khoai lang', 20, 'Rau củ giàu chất chống oxy hóa', '<p>Khoai lang là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa sự lão hóa và bảo vệ cơ thể khỏi các bệnh tật.</p>', 'images/products/product10.png', 'kg'),
+(16, 'Cần tây', 15, 'Rau củ giàu chất xơ', '<p>Cần tây là một loại rau củ giàu chất xơ, giúp cải thiện tiêu hóa và duy trì sức khỏe đường ruột.</p>', 'images/products/product9.png', 'kg'),
+(17, 'Khoai mỡ', 22, 'Rau củ giàu vitamin C', '<p>Khoai mỡ là một loại rau củ giàu vitamin C, giúp tăng cường hệ miễn dịch và chống vi khuẩn.</p>', 'images/products/product8.png', 'kg'),
+(18, 'Cải đắng', 25, 'Rau củ giàu chất chống oxy hóa', '<p>Cải đắng là một loại rau củ giàu chất chống oxy hóa, giúp ngăn ngừa các bệnh ung thư và tăng cường sức khỏe tim mạch.</p>', 'images/products/product7.png', 'kg'),
+(19, 'Cà rốt baby', 30, 'Rau củ giàu vitamin A', '<p>Cà rốt baby là một loại rau củ giàu vitamin A, thích hợp cho sức khỏe của mắt và da.</p>', 'images/products/product19.png', 'kg'),
+(20, 'Bắp cải đỏ', 35, 'Rau củ giàu chất dinh dưỡng', '<p>Bắp cải đỏ là một loại rau củ giàu chất dinh dưỡng, cung cấp nhiều vitamin và khoáng chất cho cơ thể.</p>', 'images/products/product6.png', 'kg'),
+(21, 'Sản phẩm', 50, 'Sản phẩm rất hữu dụng và nhiều tính năng bổ ích', '<p>This is some sample content.</p>', 'images/products/435707721_7127270534049861_1164234875269157289_n.jpg', 'Kg'),
+(22, 'Sản phẩm 1', 51, 'Giới thiệu 1', '<p>This is some sample content.</p>', 'images/products/binDev.png', 'kg'),
+(23, 'Sản phẩm 1', 51, 'Giới thiệu 1', '<p>This is some sample content.</p>', 'images/products/binDev.png', 'kg'),
+(24, 'Sản phẩm 2', 52, 'Sản phầm cao cấp chất lượng', '<h2>Sản phẩm siêu cao cấp</h2><p><strong>Đây là thông tin về sản phẩm:</strong></p><ol><li><span class=\"ck-list-bogus-paragraph\"><strong>Nhiều thành phần</strong></span></li><li><span class=\"ck-list-bogus-paragraph\"><strong>Dinh dưỡng tốt</strong></span></li><li><span class=\"ck-list-bogus-paragraph\"><strong>Phù hợp mẹ và bé</strong></span></li></ol>', 'images/products/2.png', 'Cái');
 
 -- --------------------------------------------------------
 
@@ -157,6 +161,31 @@ INSERT INTO `syn_products_nutritionists` (`ID`, `productID`, `nutritionistID`, `
 (1, 4, 5, 10, 'g'),
 (2, 4, 2, 12, 'g');
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `ID` int NOT NULL,
+  `Name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `UserName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Password` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Tier` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Thành viên mới',
+  `Status` int NOT NULL DEFAULT '1',
+  `Role` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`ID`, `Name`, `UserName`, `Password`, `Tier`, `Status`, `Role`) VALUES
+(1, 'Khôi Nguyên', 'khnguyen607', '$2y$10$JFPvIO2sWMMx4RBdD88/he/a7EMVo0A9xbMv9y0SbghtLOeAfg62a', 'VVip', 1, 0),
+(2, 'Thủy GIang', 'thuy', '$2y$10$8uiaX8FbCmIij5zk20pAw.GFwuHI/6CUcMcxKU0VjJ3cktkWpp8cq', 'Thành viên mới', 1, 0),
+(3, 'thủy giang', 'thuy1', '$2y$10$Jr.UjReqFZOWOvFagRdtW.cNAtuycBsfn.8XKK64pV.UWIqiZ/2Mq', 'Thành viên mới', 1, 0);
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -196,6 +225,12 @@ ALTER TABLE `syn_products_nutritionists`
   ADD KEY `syn_products_nutritionists_nutritionists` (`nutritionistID`);
 
 --
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -215,7 +250,7 @@ ALTER TABLE `nutritionists`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `syn_products_categories`
@@ -228,6 +263,12 @@ ALTER TABLE `syn_products_categories`
 --
 ALTER TABLE `syn_products_nutritionists`
   MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -44,6 +44,7 @@ class BaseModel extends Database
         $values = implode("','", array_values($data));
         $columns = implode(',', array_keys($data));
         $sql = "INSERT INTO `$table`($columns) VALUES ('$values')";
+        // exit($sql);
         $this ->_query($sql);
         return "Thành công: $sql";
     }

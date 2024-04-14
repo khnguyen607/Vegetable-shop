@@ -38,7 +38,7 @@ class UserModel extends BaseModel
     // thêm tài khoản mới 
     public function mInsert($data)
     {
-        $data['pass'] = $this->setPassword($data['pass']);
+        $data['Password'] = $this->setPassword($data['Password']);
         return $this->bmInsert(self::TABLE, $data);
     }
 
@@ -47,17 +47,16 @@ class UserModel extends BaseModel
     {
         $id = $_COOKIE['user_id'];
         $user = [
-            'user' => $data['user'],
-            'pass' => $data['currentpass']
+            'UserName' => $data['UserName'],
+            'Password' => $data['currentpass']
         ];
         if (!$this->isValidUser($user)) return False;
-        $data['pass'] = $this->setPassword($data['newpass']);
+        $data['Password'] = $this->setPassword($data['newpass']);
 
         $user = [
-            'name'  =>  $data['name'],
-            'email' =>  $data['email'],
-            'user'  =>  $data['user'],
-            'pass'  =>  $data['pass']
+            'Name'  =>  $data['Name'],
+            'UserName'  =>  $data['UserName'],
+            'Password'  =>  $data['Password']
         ];
 
         $this->bmUpdate(self::TABLE, $id, $user);
@@ -75,7 +74,7 @@ class UserModel extends BaseModel
     // Kiểm tra username tồn tại hay chưa
     public function checkuser_name($user)
     {
-        $sql = "SELECT `user` FROM `users` WHERE user = '$user'";
+        $sql = "SELECT `UserName` FROM `users` WHERE UserName = '$user'";
         $check = mysqli_fetch_assoc($this->_query($sql));
         return (isset($check) ? False : True);
     }
@@ -83,16 +82,16 @@ class UserModel extends BaseModel
     // Kiểm tra tính hợp lệ tài khoản
     public function isValidUser($data)
     {
-        $user = $data['user'];
-        $pass = $data['pass'];
+        $user = $data['UserName'];
+        $pass = $data['Password'];
 
         $table = self::TABLE;
-        $sql = "SELECT * FROM `$table` WHERE user = '$user' LIMIT 1";
+        $sql = "SELECT * FROM `$table` WHERE UserName = '$user' LIMIT 1";
         $user = mysqli_fetch_assoc($this->_query($sql));
         if (!isset($user)) return False;
-        if (!$this->checkPassword($pass, $user['pass'])) return False;
+        if (!$this->checkPassword($pass, $user['Password'])) return False;
 
-        setcookie("user_id", $user['id'], time() + 3600, "/");
+        setcookie("user_id", $user['ID'], time() + 3600, "/");
         return True;
     }
 }

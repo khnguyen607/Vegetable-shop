@@ -1,0 +1,63 @@
+<!-- Modal sign up start -->
+<div class="modal fade" id="_signupModal" tabindex="-1" aria-labelledby="_signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="_signupModalLabel">Đăng ký</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Sign up form -->
+                <form id="signupForm" method="post" action="../../backend/?controller=user&action=addUser">
+                    <div class="mb-3">
+                        <label for="signupName" class="form-label">Tên của bạn</label>
+                        <input type="text" class="form-control" name="Name" id="signupName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupUserName" class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" name="UserName" id="signupUserName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="Password" id="signupPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng ký</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Bạn đã có tài khoản? <a href="#" id="loginLink">Đăng nhập</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal sign up end -->
+
+<!-- Modal login start -->
+<div class="modal fade" id="_loginModal" tabindex="-1" aria-labelledby="_loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="_loginModalLabel">Đăng nhập</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Login form -->
+                <form id="loginForm" action="../../backend/index.php?controller=user&action=login" method="post">
+                    <div class="mb-3">
+                        <label for="loginUserName" class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" name="UserName" id="loginUserName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" name="Password" id="loginPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Bạn chưa có tài khoản? <a href="#" id="signupLink">Đăng ký</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal login end -->
