@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     _init()
+    _sendData()
 })
 
 async function _init() {
@@ -17,3 +18,33 @@ async function _init() {
     });
 }
 
+async function _sendData() {
+    document.querySelector("#exampleModal .modal-footer").addEventListener('click', () => {
+        // Dữ liệu form
+        const formData = new FormData(document.getElementById('_addUserForm'));
+
+        // Tùy chọn cấu hình cho request
+        const requestOptions = {
+            method: 'POST', // Phương thức HTTP
+            body: formData, // Dữ liệu form
+        };
+
+        // URL của endpoint nhận request
+        const url = "../../backEnd/?controller=user&action=insert";
+
+        // Gửi request sử dụng fetch
+        fetch(url, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Đọc và trả về dữ liệu JSON từ phản hồi
+            })
+            .then(data => {
+                console.log('Response data:', data); // Xử lý dữ liệu phản hồi
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+    })
+}
