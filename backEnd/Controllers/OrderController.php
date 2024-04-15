@@ -1,13 +1,13 @@
 <?php
 
-class CategoryController extends BaseController
+class OrderController extends BaseController
 {
     private $model;
 
     public function __construct()
     {
-        $this->loadModel('CategoryModel');
-        $this->model = new CategoryModel;
+        $this->loadModel('OrderModel');
+        $this->model = new OrderModel;
     }
 
     public function index()
@@ -54,8 +54,15 @@ class CategoryController extends BaseController
     {
         $id = $_GET['id'];
         $this->model->mDelete($id);
-        header("Location: ../frontend/admin/?page=categories");
+        header("Location: ../frontend/admin/?page=nutritionists");
     }
 
+    public function getAllsFK()
+    {
+        $data = $this->model->mGetAllsFK();
 
+        // Trả về dữ liệu dưới dạng JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
 }

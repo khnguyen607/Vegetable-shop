@@ -1,13 +1,13 @@
 <?php
 
-class CategoryController extends BaseController
+class NutritionalController extends BaseController
 {
     private $model;
 
     public function __construct()
     {
-        $this->loadModel('CategoryModel');
-        $this->model = new CategoryModel;
+        $this->loadModel('NutritionalModel');
+        $this->model = new NutritionalModel;
     }
 
     public function index()
@@ -54,7 +54,7 @@ class CategoryController extends BaseController
     {
         $id = $_GET['id'];
         $this->model->mDelete($id);
-        header("Location: ../frontend/admin/?page=categories");
+        header("Location: ../frontend/admin/?page=nutritionists");
     }
 
 

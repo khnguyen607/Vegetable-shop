@@ -29,18 +29,20 @@ class UserController extends BaseController
         echo json_encode($user);
     }
 
-    public function addUser()
+    public function insert()
     {
         $data = [
             'Name'  => $_POST['Name'],
             'UserName'  => $_POST['UserName'],
-            'Password'  => $_POST['Password']
+            'Password'  => $_POST['Password'],
+            'Tier'  => $_POST['Tier'],
+            'Role'  => $_POST['Role'] == "Admin" ? 1 : 0
         ];
         if ($this->model->checkuser_name($data['UserName'])) {
             $this->model->mInsert($data);
-            header("Location: ../frontend/client/?signupSuccfully=" . $data['Name']);
+            exit("true");
         } else {
-            header("Location: ../frontend/client/?signupFailed=" . $data['UserName']);
+            exit("false");
         }
     }
 
@@ -81,9 +83,8 @@ class UserController extends BaseController
             'newpass'     => $_POST['newpass']
         ];
 
-        if($this->model->updateU($data)) header("Location: ../frontend/client.html?update=true");
+        if ($this->model->updateU($data)) header("Location: ../frontend/client.html?update=true");
         else header("Location: ../frontend/client.html?update=false");
-        
     }
 
     public function delUser()
@@ -124,5 +125,4 @@ class UserController extends BaseController
         header('Content-Type: application/json');
         echo json_encode($role);
     }
-
 }

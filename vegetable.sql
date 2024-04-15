@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th4 14, 2024 lúc 11:14 PM
+-- Thời gian đã tạo: Th4 15, 2024 lúc 06:06 PM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -44,7 +44,10 @@ INSERT INTO `categories` (`ID`, `Name`) VALUES
 (5, 'nấm'),
 (6, 'trái cây trong nước'),
 (7, 'trái cây nhập khẩu'),
-(8, 'trái cây sấy khô');
+(8, 'trái cây sấy khô'),
+(9, 'danh mục1'),
+(10, 'danh mục 2'),
+(11, 'dinh dưỡng 1');
 
 -- --------------------------------------------------------
 
@@ -72,6 +75,44 @@ INSERT INTO `nutritionists` (`ID`, `Name`) VALUES
 (8, 'Potassium'),
 (9, 'Magnesium'),
 (10, 'Omega-3');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `ID` int NOT NULL,
+  `userID` int NOT NULL,
+  `TotalPrice` int NOT NULL,
+  `Status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`ID`, `userID`, `TotalPrice`, `Status`, `Date`) VALUES
+(1, 1, 100, 'Chờ duyệt', '2024-04-15 20:33:43'),
+(2, 2, 200, 'Đã duyệt', '2024-04-15 20:33:43'),
+(3, 2, 200, 'Đang giao hàng', '2024-04-16 00:57:28'),
+(4, 1, 250, 'Đã giao hàng', '2024-04-16 00:57:28'),
+(5, 2, 300, 'Đơn bị hủy', '2024-04-16 00:57:28');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ordersdetail`
+--
+
+CREATE TABLE `ordersdetail` (
+  `ID` int NOT NULL,
+  `orderID` int NOT NULL,
+  `productID` int NOT NULL,
+  `Quantity` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -203,6 +244,21 @@ ALTER TABLE `nutritionists`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `oders_users` (`userID`);
+
+--
+-- Chỉ mục cho bảng `ordersdetail`
+--
+ALTER TABLE `ordersdetail`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ordersdetail_oders` (`orderID`),
+  ADD KEY `ordersdetail_products` (`productID`);
+
+--
 -- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
@@ -238,13 +294,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `nutritionists`
 --
 ALTER TABLE `nutritionists`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `ordersdetail`
+--
+ALTER TABLE `ordersdetail`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -268,11 +336,24 @@ ALTER TABLE `syn_products_nutritionists`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `oders_users` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Các ràng buộc cho bảng `ordersdetail`
+--
+ALTER TABLE `ordersdetail`
+  ADD CONSTRAINT `ordersdetail_oders` FOREIGN KEY (`orderID`) REFERENCES `orders` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `ordersdetail_products` FOREIGN KEY (`productID`) REFERENCES `products` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Các ràng buộc cho bảng `syn_products_categories`
