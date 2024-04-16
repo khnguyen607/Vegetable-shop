@@ -65,4 +65,31 @@ class OrderController extends BaseController
         header('Content-Type: application/json');
         echo json_encode($data);
     }
+
+    public function changeStatus($currentStatus) {
+        $newStaus = null;
+        switch ($currentStatus) {
+            case 'Chờ duyệt':
+                $newStaus = "Đã duyệt"
+                break;
+                case 'Chờ duyệt':
+                    $newStaus = "Đã duyệt"
+                    break;
+                    case 'Chờ duyệt':
+                        $newStaus = "Đã duyệt"
+                        break;
+                        case 'Chờ duyệt':
+                            $newStaus = "Đã duyệt"
+                            break;
+                            case 'Chờ duyệt':
+                                $newStaus = "Đã duyệt"
+                                break;
+            default:
+                # code...
+                break;
+        }
+        $data = [
+            "Status"
+        ]
+    }
 }

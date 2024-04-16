@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     _init()
     _sendData()
+    _searchData()
 })
 
 async function _init() {
@@ -14,6 +15,7 @@ async function _init() {
         cloneitemDiv.querySelector("._userTier").textContent = item.Tier
         cloneitemDiv.querySelector("._userRole").textContent = (item.Role == 1) ? "Quản trị viên" : "Khách"
         cloneitemDiv.querySelector("._userUserName").textContent = item.UserName
+        cloneitemDiv.querySelector("._btnDelete").href = "../../backend/?controller=user&action=delete&id=" + item.ID
         table.appendChild(cloneitemDiv)
     });
 }
@@ -55,5 +57,23 @@ async function _sendData() {
             .catch(error => {
                 console.error('There was a problem with your fetch operation:', error);
             });
+    })
+}
+
+async function _searchData() {
+    function checkKeyword(tds, keyWord) {
+        for (let td of tds) {
+            if (td.textContent.toLowerCase().includes(keyWord)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    document.querySelector(".search-area button").addEventListener('click', () => {
+        var keyWord = document.querySelector(".search-area input").value.toLowerCase()
+        document.querySelectorAll("#example5 tbody tr").forEach(item => {
+            checkKeyword(item.querySelectorAll("td"), keyWord) ? item.classList.remove("d-none") : item.classList.add("d-none")
+        })
     })
 }

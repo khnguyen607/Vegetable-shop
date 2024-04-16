@@ -46,35 +46,7 @@ class UserController extends BaseController
         }
     }
 
-    public function addLibrarian()
-    {
-        $data = [
-            'Name'  => $_POST['Name'],
-            'UserName'  => $_POST['UserName'],
-            'Password'  => $_POST['Password'],
-            'Role'  => '1'
-        ];
-
-        if ($this->model->checkuser_name($data['UserName'])) {
-            $this->model->bmInsert($data);
-            header("Location: ../frontend/dashboard.html?tab=mgr__user");
-        } else {
-            header("Location: ../frontend/dashboard.html?tab=mgr__user&sign_up=false");
-        }
-    }
-
-    public function editUser()
-    {
-        $id = $_GET['id'];
-        $data = [
-            'Name'  => $_POST['Name']
-        ];
-
-        $this->model->mUpdate($id, $data);
-        header("Location: ../frontend/dashboard.html?tab=mgr__user");
-    }
-
-    public function updateUser()
+    public function update()
     {
         $data = [
             'Name'        => $_POST['Name'],
@@ -87,14 +59,11 @@ class UserController extends BaseController
         else header("Location: ../frontend/client.html?update=false");
     }
 
-    public function delUser()
+    public function delete()
     {
         $id = $_GET['id'];
-        $data = [
-            'status' => '0'
-        ];
-        $this->model->mUpdate($id, $data);
-        header("Location: ../frontend/dashboard.html?tab=mgr__user");
+        $this->model->mDelete($id, $data);
+        header("Location: ../frontend/admin/?page=users");
     }
 
     public function login()

@@ -13,7 +13,7 @@ class UserModel extends BaseModel
     {
         return $this->bmFind(self::TABLE, $id);
     }
-    public function mUpdate($id, $data)
+    public function mmUpdate($id, $data)
     {
         return $this->bmUpdate(self::TABLE, $id, $data);
     }
@@ -43,7 +43,7 @@ class UserModel extends BaseModel
     }
 
     // cập nhật thông tin User 
-    public function updateU($data)
+    public function mUpdate($data)
     {
         $id = $_COOKIE['user_id'];
         $user = [
