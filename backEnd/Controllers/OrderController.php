@@ -66,30 +66,34 @@ class OrderController extends BaseController
         echo json_encode($data);
     }
 
-    public function changeStatus($currentStatus) {
+    public function changeStatus()
+    {
+        $id = $_GET['id'];
+        $currentStatus = $_GET['currentStatus'];
         $newStaus = null;
         switch ($currentStatus) {
             case 'Chờ duyệt':
-                $newStaus = "Đã duyệt"
+                $newStaus = "Đã duyệt";
                 break;
-                case 'Chờ duyệt':
-                    $newStaus = "Đã duyệt"
-                    break;
-                    case 'Chờ duyệt':
-                        $newStaus = "Đã duyệt"
-                        break;
-                        case 'Chờ duyệt':
-                            $newStaus = "Đã duyệt"
-                            break;
-                            case 'Chờ duyệt':
-                                $newStaus = "Đã duyệt"
-                                break;
+            case 'Đã duyệt':
+                $newStaus = "Đang giao hàng";
+                break;
+            case 'Đang giao hàng':
+                $newStaus = "Đã giao hàng";
+                break;
+            case 'Đã giao hàng':
+                $newStaus = "Đơn bị hủy";
+                break;
+            case 'Đơn bị hủy':
+                $newStaus = "Đang giao hàng";
+                break;
             default:
                 # code...
                 break;
         }
         $data = [
-            "Status"
-        ]
+            "Status" => $newStaus 
+        ];
+        $this->model->mUpdate($id, $data);
     }
 }

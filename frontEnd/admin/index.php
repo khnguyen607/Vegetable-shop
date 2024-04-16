@@ -71,7 +71,7 @@
         ***********************************-->
 		<div class="footer">
 			<div class="copyright">
-				<p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2023</p>
+				<p>Copyright © Designed by <a href="#">Group 8</a> 2024</p>
 			</div>
 		</div>
 		<!--**********************************
