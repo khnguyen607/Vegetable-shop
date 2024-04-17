@@ -25,7 +25,7 @@ async function _getLayouts() {
         // Set loginModal
         document.querySelector("#collapseExample .dropdown_content").innerHTML = ""
         if (Helper.getCookie("user_id")) {
-            var user = await Helper.fetchData("user&action=findUser&id="+Helper.getCookie("user_id"))
+            var user = await Helper.fetchData("user&action=find&id="+Helper.getCookie("user_id"))
             document.querySelector("#collapseExample .dropdown_content").innerHTML = `
                 <div class="profile_info clearfix">
                 <div class="user_thumbnail">

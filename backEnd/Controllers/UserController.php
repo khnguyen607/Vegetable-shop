@@ -19,7 +19,7 @@ class UserController extends BaseController
         echo json_encode($data);
     }
 
-    public function findUser()
+    public function find()
     {
         $id = $_GET['id'];
         $user = $this->model->mFind($id);
@@ -55,14 +55,14 @@ class UserController extends BaseController
             'newpass'     => $_POST['newpass']
         ];
 
-        if ($this->model->updateU($data)) header("Location: ../frontend/client.html?update=true");
+        if ($this->model->mUpdate($data)) header("Location: ../frontend/client.html?update=true");
         else header("Location: ../frontend/client.html?update=false");
     }
 
     public function delete()
     {
         $id = $_GET['id'];
-        $this->model->mDelete($id, $data);
+        $this->model->mDelete($id);
         header("Location: ../frontend/admin/?page=users");
     }
 

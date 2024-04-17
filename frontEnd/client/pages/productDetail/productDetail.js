@@ -28,7 +28,8 @@ async function _init() {
                 Price: item.Price,
                 Unit: item.Unit,
                 Img: item.Img,
-                Quantity: document.querySelector("input.input_number").value
+                Quantity: document.querySelector("input.input_number").value,
+                ID: item.ID
             })
         // alert("Thêm giỏ hàng thành công")
         CartManager.show()

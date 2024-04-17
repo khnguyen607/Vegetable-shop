@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Khởi tạo trang
     _init();
-
+    _sendData()
+    _setUserInfo()
     // document.querySelector(".coupon_update_btn").addEventListener("click", async () => {
     //     let items = await CartManager.getItem();
     //     CartManager.clear();
@@ -41,4 +42,41 @@ async function _init() {
         <td><span class="total_price">${_totalPriceCart.toLocaleString("vi-VN") + "₫"}</span></td>
     `
     cartList.appendChild(trTemp)
+}
+
+async function _setUserInfo() {
+    var userInfo = await Helper.fetchData("user&action=find&id="+Helper.getCookie("user_id"))
+    userInfo ? document.querySelector("#_formCheckout .checkbox_item").classList.add("d-none") : document.querySelector("#_formCheckout .checkbox_item").classList.remove("d-none")
+    var inputs = document.querySelectorAll("#_formCheckout input")
+    inputs[0].value = userInfo.Name
+    inputs[1].value = userInfo.Address
+    inputs[2].value = userInfo.Phone
+    inputs[3].value = userInfo.Email
+}
+
+async function _sendData() {
+    document.querySelector("._btnOrder").addEventListener('click', (event) => {
+        event.preventDefault(); // Corrected preventDefault usage
+        const formData = new FormData();
+        formData.append('userID', Helper.getCookie("user_id"));
+        formData.append('TotalPrice', parseInt(document.querySelector(".total_price").textContent.replace(/[^\d]/g, ""))/1000);
+        formData.append('Address', document.querySelectorAll("#_formCheckout input")[1].value);
+        formData.append('orderDetails', JSON.stringify(CartManager.getItem()));
+        fetch('../../backend/?controller=order&action=insert', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.error('Error sending data:', error);
+        });
+    });
 }

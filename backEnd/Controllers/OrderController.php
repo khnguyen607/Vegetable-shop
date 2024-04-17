@@ -1,13 +1,16 @@
 <?php
 
+require "Models/OrderDetailModel.php";
 class OrderController extends BaseController
 {
     private $model;
+    private $modelDetail;
 
     public function __construct()
     {
         $this->loadModel('OrderModel');
         $this->model = new OrderModel;
+        $this->modelDetail = new OrderDetailModel;
     }
 
     public function index()
@@ -31,10 +34,21 @@ class OrderController extends BaseController
     public function insert()
     {
         $data = [
-            'Name'      => $_POST['Name']
+            'userID'      => $_POST['userID'],
+            'TotalPrice'      => $_POST['TotalPrice'],
+            'Address'      => $_POST['Address']
         ];
-
-        $this->model->mInsert($data);
+        $orderID = $this->model->mInsert($data);
+        $products = json_decode($_POST['orderDetails'], true);
+        // Example of accessing data
+        foreach ($products as $_ => $details) {
+            $tempData = [
+                'orderID'       => $orderID,
+                'productID'     => $details['ID'],
+                'Quantity'      => $details['Quantity']
+            ];
+            $this->modelDetail->mInsert($tempData);
+        }
         echo "true";
     }
 
@@ -92,7 +106,7 @@ class OrderController extends BaseController
                 break;
         }
         $data = [
-            "Status" => $newStaus 
+            "Status" => $newStaus
         ];
         $this->model->mUpdate($id, $data);
     }

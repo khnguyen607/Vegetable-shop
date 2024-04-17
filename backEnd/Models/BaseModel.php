@@ -14,7 +14,7 @@ class BaseModel extends Database
         return mysqli_query($this->connect, $sql);
     }
 
-// ------------------------------MỘT SỐ HÀM DÙNG CHUNG VIẾT SẴN -------------------------------------
+    // ------------------------------MỘT SỐ HÀM DÙNG CHUNG VIẾT SẴN -------------------------------------
     // Lấy tất cả dữ liệu 
     public function bmAlls($table, $select = ['*'])
     {
@@ -39,14 +39,32 @@ class BaseModel extends Database
     }
 
     // thêm dữ liệu 
+    // public function bmInsert($table, $data = [])
+    // {
+    //     $values = implode("','", array_values($data));
+    //     $columns = implode(',', array_keys($data));
+    //     $sql = "INSERT INTO `$table`($columns) VALUES ('$values')";
+    //     // exit($sql);
+    //     $this ->_query($sql);
+    //     return "Thành công: $sql";
+    // }
+
     public function bmInsert($table, $data = [])
     {
-        $values = implode("','", array_values($data));
+        // Xử lý dữ liệu để tránh SQL injection
+        $escapedValues = array_map(function ($value) {
+            return $this->connect->real_escape_string($value);
+        }, array_values($data));
+        // Tạo chuỗi các giá trị được escape
+        $values = implode("','", $escapedValues);
+        // Tạo chuỗi cột
         $columns = implode(',', array_keys($data));
-        $sql = "INSERT INTO `$table`($columns) VALUES ('$values')";
-        // exit($sql);
-        $this ->_query($sql);
-        return "Thành công: $sql";
+        // Tạo truy vấn SQL
+        $sql = "INSERT INTO `$table` ($columns) VALUES ('$values')";
+        // Thực hiện truy vấn
+        $this->_query($sql);
+        // Trả về ID của bản ghi vừa thêm vào
+        return $this->connect->insert_id;
     }
 
     // cập nhật dữ liệu
@@ -54,12 +72,12 @@ class BaseModel extends Database
     {
         // $values = implode("','", array_values($data));
         $values = [];
-        foreach($data as $key => $value){
+        foreach ($data as $key => $value) {
             array_push($values, "`$key`='$value'");
         }
         $values = implode(',', $values);
         $sql = "UPDATE `$table` SET $values WHERE `id`= $id";
-        $this ->_query($sql);
+        $this->_query($sql);
         return True;
     }
 
@@ -67,8 +85,7 @@ class BaseModel extends Database
     public function bmDelete($table, $id)
     {
         $sql = "DELETE FROM `$table` WHERE `id` = $id";
-        $this ->_query($sql);
+        $this->_query($sql);
         return "Thành công: $sql";
     }
-
 }

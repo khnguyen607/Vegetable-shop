@@ -14,6 +14,13 @@ async function _init() {
         cloneitemDiv.querySelector("._orderDate").textContent = item.Date
         cloneitemDiv.querySelector("._orderTotalPrice").textContent = (item.TotalPrice * 1000).toLocaleString("vi-VN") + "₫"
         setStatus(cloneitemDiv.querySelector("._orderStatus"), item.Status, item.ID)
+
+        cloneitemDiv.querySelector("._btnDetail").addEventListener('click', async ()=>{
+            var modal = document.querySelector("#exampleModal")
+            modal.querySelector("h4._orderID").textContent = "Mã hóa đơn: HD" + item.ID
+            var order = await Helper.fetchData("order&action=getAllsFK")
+            
+        })
         table.appendChild(cloneitemDiv)
     });
 }
