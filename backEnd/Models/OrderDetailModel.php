@@ -29,4 +29,15 @@ class OrderDetailModel extends BaseModel
         return $this->bmDelete(self::TABLE, $id);
     }
 
+    public function mGetOrderDetail($orderID)
+    {
+        $sql = "SELECT orderDetail.*, products.Name, products.Price, products.Unit FROM `orderDetail` INNER JOIN products ON orderDetail.productID = products.ID WHERE orderDetail.orderID = $orderID";
+        $query = $this->_query($sql);
+        $data = [];
+
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+
+        return $data;    }
 }

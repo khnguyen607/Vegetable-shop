@@ -43,25 +43,30 @@ class UserModel extends BaseModel
     }
 
     // cập nhật thông tin User 
-    public function mUpdate($data)
+    public function mUpdate($id, $data)
     {
-        $id = $_COOKIE['user_id'];
-        $user = [
-            'UserName' => $data['UserName'],
-            'Password' => $data['currentpass']
-        ];
-        if (!$this->isValidUser($user)) return False;
-        $data['Password'] = $this->setPassword($data['newpass']);
-
-        $user = [
-            'Name'  =>  $data['Name'],
-            'UserName'  =>  $data['UserName'],
-            'Password'  =>  $data['Password']
-        ];
-
-        $this->bmUpdate(self::TABLE, $id, $user);
+        if (isset($data['Password'])) $data['Password'] = $this->setPassword($data['Password']);
+        $this->bmUpdate(self::TABLE, $id, $data);
         return True;
     }
+    // public function mUpdate($id, $data)
+    // {
+    //     $user = [
+    //         'UserName' => $data['UserName'],
+    //         'Password' => $data['currentpass']
+    //     ];
+    //     if (!$this->isValidUser($user)) return False;
+    //     $data['Password'] = $this->setPassword($data['newpass']);
+
+    //     $user = [
+    //         'Name'  =>  $data['Name'],
+    //         'UserName'  =>  $data['UserName'],
+    //         'Password'  =>  $data['Password']
+    //     ];
+
+    //     $this->bmUpdate(self::TABLE, $id, $user);
+    //     return True;
+    // }
 
     // Phương thức để kiểm tra vai trò của người dùng
     public function checkUserRole()

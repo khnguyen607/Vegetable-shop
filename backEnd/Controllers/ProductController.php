@@ -38,8 +38,18 @@ class ProductController extends BaseController
             'Description'  => $_POST['Description'],
             'Img'   => $this->saveFile()
         ];
-        $this->model->mInsert($data);
-        echo "Thêm thành công";
+        $productID = $this->model->mInsert($data);
+
+        $selectedCategories = $_POST["Categories"];
+        foreach ($selectedCategories as $category) {
+            $this->model->insertCategory($productID, $category);
+        }
+
+        $nutritionistsData = json_decode($_POST["Nutritionists"], true);
+        foreach ($nutritionistsData as $nutritionalID => $value) {
+            $this->model->insertNutritional($productID, $nutritionalID, $value);
+        }
+        echo "true";
     }
 
     public function update()

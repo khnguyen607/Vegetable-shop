@@ -1,0 +1,14 @@
+1. Trình bày về DataBase
+	+ Tổng quan sự liên kết giữa các bảng
+	+ Ý nghĩa từng thành phần của từng bảng
+	+ Thứ tự trình bày các bảng:
+		products: Danh sách các sản phẩm
+		categories: Danh mục của sản phẩm
+		nutritionists: Các chất dinh dưỡng
+		syn_products_nutritionists và syn_products_categories: Bảng trung gian
+		users: Người dùng
+		orders: Thông tin đơn hàng
+		orderDetail: Chi tiết đơn hàng
+		syn_orders_users: bảng trung giản giữa order và user
+2. Trình bày giao diện web (FE/BE)
+3. Trình bày luồng code (FE/BE)

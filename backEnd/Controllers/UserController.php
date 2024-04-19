@@ -35,28 +35,36 @@ class UserController extends BaseController
             'Name'  => $_POST['Name'],
             'UserName'  => $_POST['UserName'],
             'Password'  => $_POST['Password'],
-            'Tier'  => $_POST['Tier'],
-            'Role'  => $_POST['Role'] == "Admin" ? 1 : 0
         ];
+        if (isset($_POST['Tier']) && isset($_POST['Role'])) {
+            $data['Tier'] = $_POST['Tier'];
+            $data['Role'] = $_POST['Role'] == "Admin" ? 1 : 0;
+        }
+        if (isset($_POST['Email']) && isset($_POST['Address']) && isset($_POST['Phone'])) {
+            $data['Email'] = $_POST['Email'];
+            $data['Address'] = $_POST['Address'];
+            $data['Phone'] = $_POST['Phone'];
+        }
         if ($this->model->checkuser_name($data['UserName'])) {
             $this->model->mInsert($data);
-            exit("true");
+            echo "true";
         } else {
-            exit("false");
+            echo "false";
         }
+        header("Location: ../frontend/client/?signupSuccfully=true");
     }
 
     public function update()
     {
+        $userID = $_GET['userID'];
         $data = [
-            'Name'        => $_POST['Name'],
-            'UserName'        => $_POST['UserName'],
-            'currentpass' => $_POST['currentpass'],
-            'newpass'     => $_POST['newpass']
+            'Name'         => $_POST['Name'],
+            'Tier'         => $_POST['Tier'],
         ];
+        if ($_POST['Password'] != "") $data['Password'] = $_POST['Password'];
 
-        if ($this->model->mUpdate($data)) header("Location: ../frontend/client.html?update=true");
-        else header("Location: ../frontend/client.html?update=false");
+        $this->model->mUpdate($userID, $data);
+        header("Location: ../frontend/admin/?page=users");
     }
 
     public function delete()

@@ -16,8 +16,18 @@ async function _init() {
         cloneitemDiv.querySelector("._userRole").textContent = (item.Role == 1) ? "Quản trị viên" : "Khách"
         cloneitemDiv.querySelector("._userUserName").textContent = item.UserName
         cloneitemDiv.querySelector("._btnDelete").href = "../../backend/?controller=user&action=delete&id=" + item.ID
+        cloneitemDiv.querySelector(".edit-staff").addEventListener('click', () => showEditModal(item.ID));
         table.appendChild(cloneitemDiv)
     });
+
+    async function showEditModal(userID) {
+        var userInfo = await Helper.fetchData("user&action=find&id=" + userID)
+        document.querySelector("#_edituserName").value = userInfo.Name
+        document.querySelector("#_edituserUserName").value = userInfo.UserName
+        document.querySelector("#_edituserRole").value = userInfo.Role == "0" ? "Khách" : "Admin"
+        document.querySelector("#_edituserTier").value = userInfo.Tier
+        document.querySelector("#_editUserForm").action = "../../backEnd/?controller=user&action=update&userID=" + userID
+    }
 }
 
 async function _sendData() {
@@ -77,3 +87,36 @@ async function _searchData() {
         })
     })
 }
+
+async function _sendeditData(userID) {
+    document.querySelector("#editUserModal .modal-footer .btn-primary").addEventListener('click', async () => {
+        // Dữ liệu form
+        const formData = new FormData(document.getElementById('_editUserForm'));
+
+        // Tùy chọn cấu hình cho request
+        const requestOptions = {
+            method: 'POST', // Phương thức HTTP
+            body: formData, // Dữ liệu form
+        };
+
+        // URL của endpoint nhận request
+        const url = "../../backEnd/?controller=user&action=update&userID=" + userID;
+
+        // Gửi request sử dụng fetch
+        fetch(url, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Đọc và trả về dữ liệu JSON từ phản hồi
+            })
+            .then(data => {
+                console.log(data == true);
+                data == true ? alert("Chỉnh sửa người dùng thành công") : alert("Chỉnh sửa người dùng thất bại")
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+    })
+}
+

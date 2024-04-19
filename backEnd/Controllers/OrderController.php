@@ -34,11 +34,16 @@ class OrderController extends BaseController
     public function insert()
     {
         $data = [
-            'userID'      => $_POST['userID'],
             'TotalPrice'      => $_POST['TotalPrice'],
-            'Address'      => $_POST['Address']
+            'GuestName'      => $_POST['guestName'],
+            'GuestEmail'      => $_POST['guestEmail'],
+            'GuestPhone'      => $_POST['guestPhone'],
+            'GuestAddress'      => $_POST['guestAddress'],
         ];
         $orderID = $this->model->mInsert($data);
+        if(isset($_POST['userID'])) {
+            $this->model->mInsertSynOrdersUsers($orderID, $_POST['userID']);
+        }
         $products = json_decode($_POST['orderDetails'], true);
         // Example of accessing data
         foreach ($products as $_ => $details) {
@@ -71,15 +76,6 @@ class OrderController extends BaseController
         header("Location: ../frontend/admin/?page=nutritionists");
     }
 
-    public function getAllsFK()
-    {
-        $data = $this->model->mGetAllsFK();
-
-        // Trả về dữ liệu dưới dạng JSON
-        header('Content-Type: application/json');
-        echo json_encode($data);
-    }
-
     public function changeStatus()
     {
         $id = $_GET['id'];
@@ -109,5 +105,14 @@ class OrderController extends BaseController
             "Status" => $newStaus
         ];
         $this->model->mUpdate($id, $data);
+    }
+
+    public function getOrderForUser()
+    {
+        $userID = $_GET['userID'];
+        $data = $this->model->mGetOrderForUser($userID);
+        // Trả về dữ liệu dưới dạng JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 }

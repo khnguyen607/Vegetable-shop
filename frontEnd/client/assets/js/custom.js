@@ -184,7 +184,7 @@
       min: 10000,
       max: 500000,
       step: 500,
-      values: [10000, 100000],
+      values: [10000, 500000],
       slide: function (event, ui) {
         // Format the values with currency symbol and thousands separator
         var formattedValue1 = formatCurrency(ui.values[0]);

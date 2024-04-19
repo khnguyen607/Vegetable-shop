@@ -1,3 +1,4 @@
+<?php if (!isset($_GET['page'])) header("location: ./?page=orders");?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -9,12 +10,14 @@
 	<!-- Favicon icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
 	<link href="assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
-	<link href="assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 
 	<!-- Style Css -->
 	<link class="main-css" href="assets/css/style.css" rel="stylesheet">
-
 	<script src="assets/vendor/ckeditor/ckeditor.js"></script>
+	
+    <link rel="stylesheet" href="assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+
+	<script src="shared/scripts/app.js"></script>
 </head>
 
 <body>
@@ -49,7 +52,7 @@
 			<!-- row -->
 			<?php
 			// Xác định router và trang cần được tải
-			$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+			$page = isset($_GET['page']) ? $_GET['page'] : 'orders';
 
 			// Kiểm tra xem trang có tồn tại hay không
 			$page_path = "pages/$page/$page";
@@ -91,25 +94,19 @@
 	<!--**********************************
         Main wrapper end
     ***********************************-->
-	
-	<script src="shared/scripts/app.js"></script>
+
 	<!--**********************************
         Scripts
     ***********************************-->
 	<!-- Required vendors -->
 	<script src="assets/vendor/global/global.min.js"></script>
-	<script src="assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<script src="assets/vendor/chart.js/chart.bundle.min.js"></script>
 	<script src="assets/vendor/owl-carousel/owl.carousel.js"></script>
-	<!-- Apex Chart -->
-	<!-- <script src="assets/vendor/apexchart/apexchart.js"></script> -->
-
-	<!-- Dashboard 1 -->
-	<!-- <script src="assets/js/dashboard/dashboard-1.js"></script> -->
 	<script src="assets/js/custom.min.js"></script>
 	<script src="assets/js/deznav-init.js"></script>
-	<!-- <script src="assets/js/demo.js"></script> -->
-	<!-- <script src="assets/js/styleSwitcher.js"></script> -->
+
+	
+    <script src="assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<?php
 		echo "<script src='$page_path.js'></script>"
 	?>

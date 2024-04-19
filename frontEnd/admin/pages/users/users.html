@@ -36,12 +36,13 @@
 									<td class="text-primary _userRole">1310 Glenwood Avenue</td>
 
 									<td class="text-end">
-										<a href="javascript:void(0);" class="edit-staff me-3"><i
+										<a style="cursor: pointer;" class="edit-staff me-3" data-bs-toggle="modal"
+											data-bs-target="#editUserModal"><i
 												class="fa fa-pencil fs-18 text-success"></i></a>
-										<a href="javascript:void(0);" class="_btnDelete"><i class="fa fa-trash fs-18 text-danger"></i></a>
+										<a href="javascript:void(0);" class="_btnDelete"><i
+												class="fa fa-trash fs-18 text-danger"></i></a>
 									</td>
 								</tr>
-
 							</tbody>
 						</table>
 					</div>
@@ -64,25 +65,28 @@
 						<div class="col-xl-12">
 							<div class="form-group">
 								<label for="_userName" class="col-form-label">Họ tên:</label>
-								<input type="text" class="form-control" id="_userName" name="Name" placeholder="Nhập tên của người dùng">
+								<input type="text" class="form-control" id="_userName" name="Name"
+									placeholder="Nhập tên của người dùng">
 							</div>
 						</div>
 						<div class="col-xl-6">
 							<div class="form-group">
 								<label for="_userUserName" class="col-form-label">Tên đăng nhập:</label>
-								<input type="text" class="form-control" id="_userUserName" name="UserName"  placeholder="Nhập tên đăng nhập">
+								<input type="text" class="form-control" id="_userUserName" name="UserName"
+									placeholder="Nhập tên đăng nhập">
 							</div>
 						</div>
 						<div class="col-xl-6">
 							<div class="form-group">
 								<label for="_userPassword" class="col-form-label">Mật khẩu</label>
-								<input type="text" class="form-control" id="_userPassword" name="Password"  placeholder="Nhập mật khẩu">
+								<input type="text" class="form-control" id="_userPassword" name="Password"
+									placeholder="Nhập mật khẩu">
 							</div>
 						</div>
 						<div class="col-xl-6">
 							<div class="form-group">
 								<label for="_userRole" class="col-form-label">Quyền</label>
-								<select class="form-control" id="_userRole" name="Role" >
+								<select class="form-control" id="_userRole" name="Role">
 									<option>Admin</option>
 									<option>Client</option>
 								</select>
@@ -91,7 +95,8 @@
 						<div class="col-xl-6">
 							<div class="form-group">
 								<label for="_userTier" class="col-form-label">Hạng thành viên</label>
-								<input type="text" class="form-control"id="_userTier" name="Tier"  value="Thành viên mới">
+								<input type="text" class="form-control" id="_userTier" name="Tier"
+									value="Thành viên mới">
 							</div>
 						</div>
 					</div>
@@ -103,6 +108,62 @@
 				<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Đóng</button>
 				<button type="button" class="btn btn-primary">Thêm</button>
 			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editUserModalLabel">Chỉnh sửa</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="_editUserForm" method="post">
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="form-group">
+								<label for="_edituserName" class="col-form-label">Họ tên:</label>
+								<input type="text" class="form-control" id="_edituserName" name="Name"
+									placeholder="Nhập tên của người dùng">
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<div class="form-group">
+								<label for="_edituserUserName" class="col-form-label">Tên đăng nhập:</label>
+								<input readonly type="text" class="form-control" id="_edituserUserName">
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<div class="form-group">
+								<label for="_edituserPassword" class="col-form-label">Mật khẩu</label>
+								<input type="text" class="form-control" id="_edituserPassword" name="Password"
+									placeholder="Nhập mật khẩu mới">
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<div class="form-group">
+								<label for="_edituserRole" class="col-form-label">Quyền</label>
+								<input readonly type="text" class="form-control" id="_edituserRole">
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<div class="form-group">
+								<label for="_edituserTier" class="col-form-label">Hạng thành viên</label>
+								<input type="text" class="form-control" id="_edituserTier" name="Tier"
+									value="Thành viên mới">
+							</div>
+						</div>
+					</div>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Đóng</button>
+				<button type="submit" class="btn btn-primary">Thêm</button>
+			</div>
+			</form>
 		</div>
 	</div>
 </div>

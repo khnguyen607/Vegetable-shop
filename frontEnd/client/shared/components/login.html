@@ -8,18 +8,34 @@
             </div>
             <div class="modal-body">
                 <!-- Sign up form -->
-                <form id="signupForm" method="post" action="../../backend/?controller=user&action=addUser">
+                <form id="signupForm" method="post" action="../../backend/?controller=user&action=insert">
                     <div class="mb-3">
                         <label for="signupName" class="form-label">Tên của bạn</label>
-                        <input type="text" class="form-control" name="Name" id="signupName">
+                        <input required type="text" class="form-control" name="Name" id="signupName">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="signupPhone" class="form-label">Số điện thoại</label>
+                            <input required type="text" class="form-control" name="Phone" id="signupPhone">
+                        </div>
+                        <div class="col-6">
+                            <label for="signupEmail" class="form-label">Email</label>
+                            <input required type="email" class="form-control" name="Email" id="signupEmail">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="signupUserName" class="form-label">Tên đăng nhập</label>
+                            <input required type="text" class="form-control" name="UserName" id="signupUserName">
+                        </div>
+                        <div class="col-6">
+                            <label for="signupPassword" class="form-label">Mật khẩu</label>
+                            <input required type="password" class="form-control" name="Password" id="signupPassword">
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="signupUserName" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" name="UserName" id="signupUserName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="signupPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="Password" id="signupPassword">
+                        <label for="signupAddress" class="form-label">Địa chỉ giao hàng mặc định</label>
+                        <input type="text" class="form-control" name="Address" id="signupAddress">
                     </div>
                     <button type="submit" class="btn btn-primary">Đăng ký</button>
                 </form>
