@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     _loginModal()
     // Hiển thị sản phẩm đang có trong cart
     CartManager.show()
-
 })
 
 async function _getLayouts() {
@@ -25,7 +24,9 @@ async function _getLayouts() {
         // Set loginModal
         document.querySelector("#collapseExample .dropdown_content").innerHTML = ""
         if (Helper.getCookie("user_id")) {
-            var user = await Helper.fetchData("user&action=find&id="+Helper.getCookie("user_id"))
+            // Khởi tạo myOrderModal
+            _myOrderModal()
+            var user = await Helper.fetchData("user&action=find&id=" + Helper.getCookie("user_id"))
             document.querySelector("#collapseExample .dropdown_content").innerHTML = `
                 <div class="profile_info clearfix">
                 <div class="user_thumbnail">
@@ -37,8 +38,7 @@ async function _getLayouts() {
                 </div>
                 </div>
                 <ul class="settings_options ul_li_block clearfix">
-                    <li><a href="#!"><i class="fas fa-user-circle"></i> Profile</a></li>
-                    <li><a href="#!"><i class="fas fa-user-cog"></i> Settings</a></li>
+                    <li><a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#_myOrderModal"><i class="fas fa-user-circle"></i> Đơn hàng của tôi</a></li>
                     <li><a href="../../backend/?controller=user&action=logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             `
@@ -125,13 +125,42 @@ async function _loginModal() {
     // Các trạng thái đăng nhập, đăng ký
     if (Helper.getParameterByName("loginSuccfully")) {
         alert("Đăng nhập thành công")
-    } else if(Helper.getParameterByName("loginFailed")) {
+    } else if (Helper.getParameterByName("loginFailed")) {
         alert("Đăng nhập thất bại")
-    } else if(Helper.getParameterByName("signupSuccfully")) {
+    } else if (Helper.getParameterByName("signupSuccfully")) {
         alert("Đăng ký thành công")
-    } else if(Helper.getParameterByName("signupFailed")) {
+    } else if (Helper.getParameterByName("signupFailed")) {
         alert("Đăng ký thất bại")
-    } else if(Helper.getParameterByName("logoutFailed")) {
+    } else if (Helper.getParameterByName("logoutFailed")) {
         alert("Đăng xuất thành công")
     }
+}
+
+async function _myOrderModal() {
+    try {
+        // Get myOrderModal
+        var myOrderModal = document.createElement("div")
+        myOrderModal.innerHTML = await Helper.fetchHTML("./shared/components/myOrders.html");
+        var items = await Helper.fetchData("order&action=getOrderForUser&userID=" + Helper.getCookie("user_id"))
+        console.log(items);
+        myOrderModal.querySelector(".modal-body .list-group").innerHTML = ""
+        items.forEach(item => {
+            var orderDetail = document.createElement("a")
+            orderDetail.classList.add("list-group-item", "list-group-item-action")
+            orderDetail.innerHTML = `
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Đơn hàng: HD${item.orderID}</h5>
+                <small>Thời gian đặt hàng: ${item.Date}</small>
+                </div>
+                <p class="mb-1">Tổng tiền: ${(item.TotalPrice * 1000).toLocaleString("vi-VN")}₫</p>
+                <small>Trạng thái: ${item.Status}</small>
+            `
+            myOrderModal.querySelector(".modal-body .list-group").appendChild(orderDetail)
+        });
+        // Set Modal
+        document.querySelector("body").appendChild(myOrderModal)
+    } catch (error) {
+        console.error('Error loading HTML:', error);
+    }
+
 }

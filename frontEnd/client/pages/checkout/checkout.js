@@ -49,19 +49,20 @@ async function _setUserInfo() {
     userInfo ? document.querySelector("#_formCheckout .checkbox_item").classList.add("d-none") : document.querySelector("#_formCheckout .checkbox_item").classList.remove("d-none")
     var inputs = document.querySelectorAll("#_formCheckout input")
     inputs[0].value = userInfo.Name
-    inputs[1].value = userInfo.Address
+    inputs[1].value = userInfo.Email
     inputs[2].value = userInfo.Phone
-    inputs[3].value = userInfo.Email
+    inputs[3].value = userInfo.Address
 }
 
 async function _sendData() {
     document.querySelector("._btnOrder").addEventListener('click', (event) => {
         event.preventDefault(); // Corrected preventDefault usage
-        const formData = new FormData();
-        formData.append('userID', Helper.getCookie("user_id"));
+        const formData = new FormData(document.querySelector("#_formCheckout"));
         formData.append('TotalPrice', parseInt(document.querySelector(".total_price").textContent.replace(/[^\d]/g, ""))/1000);
-        formData.append('Address', document.querySelectorAll("#_formCheckout input")[1].value);
         formData.append('orderDetails', JSON.stringify(CartManager.getItem()));
+        if (Helper.getCookie("user_id")) {
+            formData.append('userID', Helper.getCookie("user_id"));
+        }
         fetch('../../backend/?controller=order&action=insert', {
             method: 'POST',
             body: formData
@@ -74,6 +75,11 @@ async function _sendData() {
         })
         .then(result => {
             console.log(result);
+            if (result == true) {
+                alert("Cảm ơn bạn đã tin tưởng mua hàng!")
+                CartManager.clear()
+                window.location.href = "./";
+            }
         })
         .catch(error => {
             console.error('Error sending data:', error);

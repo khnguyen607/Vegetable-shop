@@ -36,12 +36,14 @@
                                     </td>
                                     <td class="text-primary">gabriel@gmail.com</td>
                                     <td>
-                                        <span class="me-3">
+                                        <!-- <span class="me-3">
                                             <a href="javascript:void(0);" class="edit-appointment"><i
                                                     class="fa fa-pencil fs-18 " aria-hidden="true"></i></a>
-                                        </span>
+                                        </span> -->
                                         <span>
-                                            <i class="fa fa-trash fs-18 text-danger" aria-hidden="true"></i>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-trash fs-18 text-danger" aria-hidden="true"></i>
+                                            </a>
                                         </span>
                                     </td>
                                 </tr>
@@ -75,14 +77,15 @@
                         <div class="col-xl-6">
                             <div class="form-group">
                                 <label for="ProductPrice" class="col-form-label">Giá:</label>
-                                <input required type="number" class="form-control" name="Price" id="ProductPrice" min="1"
-                                    placeholder="Nhập giá sản phẩm(10 = 10.000₫)">
+                                <input required type="number" class="form-control" name="Price" id="ProductPrice"
+                                    min="1" placeholder="Nhập giá sản phẩm(10 = 10.000₫)">
                             </div>
                         </div>
                         <div class="col-xl-6">
                             <div class="form-group">
                                 <label for="ProductUnit" class="col-form-label">Đơn vị tính:</label>
-                                <input required type="text" class="form-control" name="Unit" id="ProductUnit" placeholder="Kg/Cái">
+                                <input required type="text" class="form-control" name="Unit" id="ProductUnit"
+                                    placeholder="Kg/Cái">
                             </div>
                         </div>
                         <div class="col-xl-12">
@@ -94,13 +97,74 @@
                         </div>
                         <div class="col-xl-12">
                             <div class="form-group">
+                                <label for="ProductCategories" class="col-form-label">Danh mục:</label>
+                                <select id="ProductCategories" class="selectpicker w-100" multiple
+                                    data-live-search="true" name="Categories[]">
+                                </select>
+                            </div>
+                            <script>
+                                _dumpCategories()
+                                async function _dumpCategories() {
+                                    var items = await Helper.fetchData("category")
+                                    items.forEach(item => {
+                                        var option = document.createElement("option")
+                                        option.textContent = item.Name
+                                        option.value = item.ID
+                                        document.querySelector("#ProductCategories").appendChild(option)
+                                    });
+                                }
+                            </script>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label for="ProductNutritionists" class="col-form-label">Chất dinh dưỡng:</label>
+                                <select id="ProductNutritionists" class="selectpicker w-100" multiple
+                                    data-live-search="true" name="Nutritionists[]">
+                                </select>
+                                <div class="row my-1 ProductNutritionistsValue">
+                                </div>
+
+                            </div>
+                            <script>
+                                _dumpNutritional()
+                                async function _dumpNutritional() {
+                                    var items = await Helper.fetchData("nutritional")
+                                    items.forEach(item => {
+                                        var option = document.createElement("option")
+                                        option.textContent = item.Name
+                                        option.value = item.ID
+                                        document.querySelector("#ProductNutritionists").appendChild(option)
+                                    });
+
+                                    document.querySelector("#ProductNutritionists").addEventListener('change', () => {
+                                        document.querySelector(".ProductNutritionistsValue").innerHTML=""
+                                        var options = document.querySelector("#ProductNutritionists").options;
+                                        for (var i = 0; i < options.length; i++) {
+                                            if (options[i].selected) {
+                                                var optionDiv = document.createElement("div")
+                                                optionDiv.classList.add("col")
+                                                optionDiv.innerHTML = `
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">${options[i].text}</span>
+                                                        <input type="number" min="1" class="form-control" placeholder="Giá trị" data-nutritional="${options[i].value}">
+                                                    </div>
+                                            `
+                                                document.querySelector(".ProductNutritionistsValue").appendChild(optionDiv)
+                                            }
+                                        }
+                                    })
+                                }
+                            </script>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="form-group">
                                 <label for="ProductDescript" class="col-form-label">Thông tin chi tiết sản phẩm:</label>
                                 <div id="ProductDescript"></div>
                                 <script>
                                     var _ProductDescript = "";
                                     ClassicEditor
                                         .create(document.querySelector('#ProductDescript'))
-                                        .then(editor=>{
+                                        .then(editor => {
                                             _ProductDescript = editor
                                         })
                                         .catch(error => {
@@ -125,3 +189,8 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#ProductCategories').selectpicker();
+    });
+</script>

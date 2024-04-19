@@ -29,9 +29,15 @@ class OrderModel extends BaseModel
         return $this->bmDelete(self::TABLE, $id);
     }
 
-    public function mGetAllsFK()
+    public function mInsertSynOrdersUsers($orderID, $userID)
     {
-        $sql = "SELECT orders.*, users.Name FROM orders INNER JOIN users ON orders.userID = users.ID";
+        $sql = "INSERT INTO `syn_orders_users`(`userID`, `orderID`) VALUES ('$userID','$orderID')";
+        $this->_query($sql);
+    }
+
+    public function mGetOrderForUser($userID)
+    {
+        $sql = "SELECT * FROM `syn_orders_users` INNER JOIN orders ON syn_orders_users.orderID = orders.ID WHERE syn_orders_users.userID='$userID'";
         $query = $this->_query($sql);
         $data = [];
 

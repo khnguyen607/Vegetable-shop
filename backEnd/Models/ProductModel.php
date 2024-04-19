@@ -62,4 +62,16 @@ class ProductModel extends BaseModel
 
         return $data;
     }
+
+    public function insertCategory($productID, $categoryID)
+    {
+        $sql = "INSERT INTO `syn_products_categories`(`productID`, `categoryID`) VALUES ('$productID','$categoryID')";
+        $this->_query($sql);
+    }
+
+    public function insertNutritional($productID, $nutritionistID, $Value)
+    {
+        $sql = "INSERT INTO `syn_products_nutritionists`(`productID`, `nutritionistID`, `Value`) VALUES ('$productID','$nutritionistID','$Value')";
+        $this->_query($sql);
+    }
 }

@@ -58,4 +58,13 @@ class OrderDetailController extends BaseController
     }
 
 
+    public function getOrderDetail()
+    {
+        $orderID = $_GET['orderID'];
+        $data = $this->model->mGetOrderDetail($orderID);
+
+        // Trả về dữ liệu dưới dạng JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
 }

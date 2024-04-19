@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     _init()
     _sendData()
+    _searchBy()
 })
 
 async function _init() {
@@ -26,6 +27,12 @@ async function _sendData() {
         var fileInput = document.querySelector('#ProductImg');
         formData.append('Img', fileInput.files[0]);
 
+        var nutritionalInput = {}
+        // Thêm giá trị dinh dưỡng
+        document.querySelectorAll(".ProductNutritionistsValue input.form-control").forEach(nutri=>{
+            nutritionalInput[nutri.getAttribute("data-nutritional")] = nutri.value
+        })
+        formData.append('Nutritionists', JSON.stringify(nutritionalInput));
         // Tùy chọn cấu hình cho request
         const requestOptions = {
             method: 'POST', // Phương thức HTTP
@@ -44,10 +51,26 @@ async function _sendData() {
                 return response.json(); // Đọc và trả về dữ liệu JSON từ phản hồi
             })
             .then(data => {
-                console.log('Response data:', data); // Xử lý dữ liệu phản hồi
+                if (data==true) {
+                    window.location.reload();
+                }
             })
             .catch(error => {
                 console.error('There was a problem with your fetch operation:', error);
+                alert("Có lỗi xảy ra")
             });
+    })
+}
+
+async function _searchBy() {
+    document.querySelector(".search-area button").addEventListener('click', ()=>{
+        var keyWord = document.querySelector(".search-area input").value.toLowerCase()
+        document.querySelectorAll("#example5 tbody tr").forEach(item=>{
+            if (item.querySelector("span.text-nowrap").textContent.toLowerCase().includes(keyWord)) {
+                item.classList.remove("d-none")
+            } else {
+                item.classList.add("d-none")
+            }
+        })
     })
 }
