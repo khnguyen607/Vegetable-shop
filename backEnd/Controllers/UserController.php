@@ -48,10 +48,11 @@ class UserController extends BaseController
         if ($this->model->checkuser_name($data['UserName'])) {
             $this->model->mInsert($data);
             echo "true";
+            header("Location: ../frontend/client/?signupSuccfully=true");
         } else {
             echo "false";
+            header("Location: ../frontend/client/?signupFailed=true");
         }
-        header("Location: ../frontend/client/?signupSuccfully=true");
     }
 
     public function update()
@@ -85,7 +86,7 @@ class UserController extends BaseController
         if ($check) {
             header("Location: ../frontend/client/?loginSuccfully=true");
         } else {
-            header("Location: ../frontend/client/?loginFailed=" . $data['UserName']);
+            header("Location: ../frontend/client/?loginFailed=true" . $data['UserName']);
         }
     }
 

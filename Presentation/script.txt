@@ -10,5 +10,18 @@
 		orders: Thông tin đơn hàng
 		orderDetail: Chi tiết đơn hàng
 		syn_orders_users: bảng trung giản giữa order và user
-2. Trình bày giao diện web (FE/BE)
+2. Trình bày giao diện web (client/admin)
+	Client:
+		Cửa hàng: Tìm kiếm, lọc theo giá
+		Chi tiết sản phẩm
+		Thêm sản phẩm vào giỏ hàng
+		Thao tác trên giỏ hàng
+		Thanh toán
+		Đăng ký tài khoản: các th ngoại lệ(trùng tên đn, k nhập nội dung)
+		Đăng nhập: th ngoại lệ: sai tk mk
+		Mua hàng lại sau khi đăng nhập cho thấy chức năng có thêm khi có tài khoản.(Theo dõi đơn hàng, Tự nhập nội dung khi mua hàng)
+		Tiến hành đăng xuất tài khoản
+	Admin:
+		Đơn hàng: lọc đơn theo trạng thái đơn, chức năng tìm kiếm, đổi trạng thái đơn,xem chi tiết, xóa
+		Các mục khác tương tự trình bày từng chức năng.
 3. Trình bày luồng code (FE/BE)
