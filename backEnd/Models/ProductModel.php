@@ -26,6 +26,7 @@ class ProductModel extends BaseModel
 
     public function mDelete($id)
     {
+        $this->_dependency($id);
         return $this->bmDelete(self::TABLE, $id);
     }
 
@@ -73,5 +74,13 @@ class ProductModel extends BaseModel
     {
         $sql = "INSERT INTO `syn_products_nutritionists`(`productID`, `nutritionistID`, `Value`) VALUES ('$productID','$nutritionistID','$Value')";
         $this->_query($sql);
+    }
+
+    private function _dependency($productID)
+    {
+
+        $this->_query("DELETE FROM `syn_products_nutritionists` WHERE productID=$productID");
+        $this->_query("DELETE FROM `syn_products_categories` WHERE productID=$productID");
+        $this->_query("DELETE FROM `orderdetail` WHERE productID=$productID");
     }
 }

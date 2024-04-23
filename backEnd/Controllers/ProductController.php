@@ -56,26 +56,28 @@ class ProductController extends BaseController
     {
         $id = $_GET['id'];
         $data = [
-            'name'      => $_POST['name'],
-            'location'  => $_POST['location'],
-            'img'       => $_POST['img'],
-            'capacity'  => $_POST['capacity'],
-            'utility'   => $_POST['utility']
+            'Name'      => $_POST['Name'],
+            'Price'      => $_POST['Price'],
+            'Subtitle'  => $_POST['Subtitle'],
+            'Unit'       => $_POST['Unit'],
+            'Description'  => $_POST['Description']
         ];
-        exit($data);
-        $this->model->mUpdate($id, $data);
-
-        header("Location: ../frontend/dashboard.html?tab=mgr__room");
+        $img = $this->saveFile();
+        if (isset($img)) {
+            $data['Img'] = $img;
+        }
+        if ($this->model->mUpdate($id, $data)) {
+            echo "true";
+        } else {
+            echo "false";
+        }
     }
 
     public function delete()
     {
         $id = $_GET['id'];
-        $data = [
-            'status' => '0'
-        ];
-        $this->model->mDelete($id, $data);
-        header("Location: ../frontend/dashboard.html?tab=mgr__room");
+        $this->model->mDelete($id);
+        header("Location: ../frontend/admin/?page=products");
     }
 
 
@@ -116,10 +118,10 @@ class ProductController extends BaseController
                 // Trả về đường dẫn của tệp tin đã được lưu
                 return substr($targetFilePath, 4);
             } else {
-                echo "Failed to upload file.";
+                // echo "Failed to upload file.";
             }
         } else {
-            echo "No file uploaded or invalid request.";
+            // echo "No file uploaded or invalid request.";
         }
         return null;
     }

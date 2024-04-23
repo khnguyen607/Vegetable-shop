@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     _init()
     _sendData()
     _searchBy()
+    _sendEditData()
 })
 
 async function _init() {
@@ -14,12 +15,24 @@ async function _init() {
         cloneitemDiv.querySelector("img").src = Helper.getLink(item.Img)
         cloneitemDiv.querySelector(".text-nowrap").textContent = item.Name
         cloneitemDiv.querySelector(".text-primary").textContent = (item.Price * 1000).toLocaleString("vi-VN") + "₫"
+        cloneitemDiv.querySelector("._btnDelete").href = "../../backend/?controller=product&action=delete&id=" + item.ID
+        cloneitemDiv.querySelector(".edit-appointment").addEventListener('click', async () => {
+            var editModal = document.querySelector("#_editModal");
+            editModal.querySelector(".modal-footer .btn-primary").setAttribute("data-id", item.ID)
+            var productEditSelected = await Helper.fetchData("product&action=find&id=" + item.ID)
+            editModal.querySelector("#editProductName").value = productEditSelected.Name
+            editModal.querySelector("#editProductPrice").value = productEditSelected.Price
+            editModal.querySelector("#editProductUnit").value = productEditSelected.Unit
+            editModal.querySelector("#editProductSubtitle").value = productEditSelected.Subtitle
+            // Gán nội dung mới cho biến _editProductDescript
+            _editProductDescript.setData(productEditSelected.Description);
+        })
         table.appendChild(cloneitemDiv)
     });
 }
 
 async function _sendData() {
-    document.querySelector("#exampleModal .modal-footer").addEventListener('click', () => {
+    document.querySelector("#exampleModal .modal-footer .btn-primary").addEventListener('click', () => {
         // Dữ liệu form
         const formData = new FormData(document.getElementById('_addProductForm'));
         formData.append('Description', document.querySelector('#ProductDescript').parentElement.querySelector('.ck-content').innerHTML);
@@ -29,7 +42,7 @@ async function _sendData() {
 
         var nutritionalInput = {}
         // Thêm giá trị dinh dưỡng
-        document.querySelectorAll(".ProductNutritionistsValue input.form-control").forEach(nutri=>{
+        document.querySelectorAll(".ProductNutritionistsValue input.form-control").forEach(nutri => {
             nutritionalInput[nutri.getAttribute("data-nutritional")] = nutri.value
         })
         formData.append('Nutritionists', JSON.stringify(nutritionalInput));
@@ -51,7 +64,7 @@ async function _sendData() {
                 return response.json(); // Đọc và trả về dữ liệu JSON từ phản hồi
             })
             .then(data => {
-                if (data==true) {
+                if (data == true) {
                     window.location.reload();
                 }
             })
@@ -63,14 +76,56 @@ async function _sendData() {
 }
 
 async function _searchBy() {
-    document.querySelector(".search-area button").addEventListener('click', ()=>{
+    document.querySelector(".search-area button").addEventListener('click', () => {
         var keyWord = document.querySelector(".search-area input").value.toLowerCase()
-        document.querySelectorAll("#example5 tbody tr").forEach(item=>{
+        document.querySelectorAll("#example5 tbody tr").forEach(item => {
             if (item.querySelector("span.text-nowrap").textContent.toLowerCase().includes(keyWord)) {
                 item.classList.remove("d-none")
             } else {
                 item.classList.add("d-none")
             }
         })
+    })
+}
+
+async function _sendEditData() {
+    document.querySelector("#_editModal .modal-footer .btn-primary").addEventListener('click', () => {
+        // Dữ liệu form
+        const formData = new FormData(document.getElementById('_editProductForm'));
+        formData.append('Description', document.querySelector('#editProductDescript').parentElement.querySelector('.ck-content').innerHTML);
+        var fileInput = document.querySelector('#editProductImg');
+        if (fileInput.files[0]) {
+            formData.append('Img', fileInput.files[0]);
+        }
+        
+
+        // Tùy chọn cấu hình cho request
+        const requestOptions = {
+            method: 'POST', // Phương thức HTTP
+            body: formData, // Dữ liệu form
+        };
+
+        var productID = document.querySelector("#_editModal .modal-footer .btn-primary").getAttribute("data-id");
+        // URL của endpoint nhận request
+        const url = "../../backEnd/?controller=product&action=update&id=" + productID;
+
+        // Gửi request sử dụng fetch
+        fetch(url, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Đọc và trả về dữ liệu JSON từ phản hồi
+            })
+            .then(data => {
+                console.log(data);
+                if (data == true) {
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                alert("Có lỗi xảy ra")
+            });
     })
 }
