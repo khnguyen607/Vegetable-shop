@@ -46,7 +46,6 @@ class CartManager {
         sessionStorage.setItem("cart", JSON.stringify(items));
     }
 
-
     // Phương thức để đọc một giá trị từ sessionStorage
     static getItem() {
         const item = sessionStorage.getItem("cart");
@@ -92,6 +91,7 @@ class Helper {
             throw error;
         }
     }
+
     // Lấy biến get của trình duyệt
     static getParameterByName(name) {
         // Tạo một đối tượng URLSearchParams từ query string của URL
@@ -126,6 +126,7 @@ class Helper {
         return null;
     }
 
+    // Lấy hình ảnh trong backend
     static getLink(link) {
         return window.location.origin + "/backend/www/" + link
     }
